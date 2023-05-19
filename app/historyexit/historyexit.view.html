@@ -1,0 +1,82 @@
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12">
+                <div class="scroller" style="max-height:450px;overflow-y:scroll " data-rail-visible="1"
+                    data-rail-color="red" data-handle-color="magenta">
+                    <table ng-table="tableParamsHistoryExit" class="table table-condensed table-striped table-bordered thead-dark">
+                        <tbody>
+                            <tr ng-repeat="he in tableDisplayHistoryExit">
+                                <td class="rowTd text-center" data-title="'STT'">{{$index+1}}</td>
+                                <td class="rowTd text-center" data-title="'Thời gian'" sortable="''"
+                                    filter="{time:'text'}">{{he.time}}</td>
+                                <td class="rowTd text-center" data-title="'Loại'">
+                                    <span ng-show="he.type==1" style="color:#ff0000;">
+                                        <i class="fa-solid fa-right-to-bracket"></i> Gửi xe</span>
+                                    <span ng-show="he.type==0" style="color:#0e864a;">
+                                        <i class="fa-regular fa-circle-left"></i> Lấy xe</span>
+                                </td>
+                                <td class="rowTd text-center" data-title="'Ghi chú'" filter="{note:'text'}">
+                                    {{he.note}}</td>
+                                <td class="rowId text-center">
+                                    <button ng-click="ShowDetailHistoryExit(he)" class="btn btn-outline-success">Chi tiết</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade bd-example-modal-xl" tabindex="-1" id="modal-he-detail">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin chi tiết</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-xl-11">
+                        <div class="card text-black" style="border-radius:25px;">
+                            <div class="card-body p-md-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                        <form class="mx-1 mx-md-4" role="form" name="formRegister">
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <label class="form-label" for="form3Example1c">Ngày</label>
+                                                    <input ng-model="HESelected.time" type="text" id="form3Example1c" class="form-control" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <label class="form-label" for="form3Example2c">Ghi chú</label>
+                                                    <input ng-model="HESelected.note" type="text" id="form3Example2c" class="form-control" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <label class="form-label" for="form3Example3c">Loại</label>
+                                                    <input ng-model="HESelected.type" type="text" id="form3Example3c" class="form-control" disabled/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                        <img ng-show="HESelected.image!=''" src="data:image/jpeg;base64,{{HESelected.image}}" class="img-fluid" alt="Sample image">
+                                        <img ng-show="HESelected.image==''"src="./assets/images/image-default.jpg" alt="image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
